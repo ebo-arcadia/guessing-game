@@ -2,7 +2,7 @@ import { TextInput, View, StyleSheet, Alert, Button } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import { useState } from "react";
 
-function StartGameScreen() {
+function StartGameScreen({ onGuessedNum }) {
   const [enteredNum, setEnteredNum] = useState("");
 
   function inputTextHandler(userInput) {
@@ -14,15 +14,15 @@ function StartGameScreen() {
   }
 
   function confirmInputHandler() {
-    const parsedInputNum = parseInt(enteredNum);
-    if (isNaN(parsedInputNum) || parsedInputNum <= 0 || parsedInputNum > 99) {
+    const guessedNum = parseInt(enteredNum);
+    if (isNaN(guessedNum) || guessedNum <= 0 || guessedNum > 99) {
       Alert.alert("Invalid input number", "number must between 0 to 99", [
         { text: "Okay", style: "destructive", onPress: resetInputHandler },
       ]);
       return;
     }
 
-    console.info("valid input number!");
+    onGuessedNum(guessedNum);
   }
 
   return (
