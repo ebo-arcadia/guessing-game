@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
+import Colors from "./constants/colors";
 
 export default function App() {
   [userGuessedNum, setUserGuessedNum] = useState();
@@ -19,7 +20,10 @@ export default function App() {
   }
 
   return (
-    <LinearGradient colors={["yellow", "red"]} style={styles.rootScreen}>
+    <LinearGradient
+      colors={[Colors.PrimaryYellow, Colors.PrimaryRed]}
+      style={styles.rootScreen}
+    >
       <ImageBackground
         source={require("./assets/images/dice.jpg")}
         resizeMode="cover"
