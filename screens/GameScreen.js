@@ -15,12 +15,12 @@ function generateRandomNumber(min, max, userGuessedNum) {
 
 function GameScreen(props) {
   const initGuess = generateRandomNumber(1, 100, props.enteredNum);
-  const [firstGuess, setFirstGuess] = useState(initGuess);
+  const [currentGuess, setCurrentGuess] = useState(initGuess);
 
   return (
     <View style={styles.screen}>
-      <Title>Your Guessed Number</Title>
-      <NumberContainer>{firstGuess}</NumberContainer>
+      <Title>Current Guessed Number</Title>
+      <NumberContainer>{currentGuess}</NumberContainer>
       <Text>Is it too high or too lower? + / -</Text>
       <Text>Load rounds</Text>
     </View>
