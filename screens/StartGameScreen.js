@@ -42,6 +42,7 @@ function StartGameScreen({ onGuessedNum }) {
           <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
         </View>
         <View style={styles.buttonContainer}>
+          <Button title="row!!!"></Button>
           <PrimaryButton onPress={confirmInputHandler}>Row!</PrimaryButton>
         </View>
       </View>
