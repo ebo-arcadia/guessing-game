@@ -45,18 +45,9 @@ function GameScreen(props) {
       <NumberContainer>{currentGuess}</NumberContainer>
       <Text>Is the number too high or too lower?</Text>
       <View>
-        <Button
-          title="-"
-          onPress={nextGuessHandler.bind(this, "lower")}
-        ></Button>
-        <Button
-          title="+"
-          onPress={nextGuessHandler.bind(this, "higher")}
-        ></Button>
         <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
           -
         </PrimaryButton>
-        ;
         <PrimaryButton onPress={nextGuessHandler.bind(this, "higher")}>
           +
         </PrimaryButton>

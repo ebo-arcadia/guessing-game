@@ -5,6 +5,7 @@ function PrimaryButton({ children, onPress }) {
   function pressHandler() {
     onPress();
   }
+
   return (
     <View style={styles.buttonOuterContainer}>
       <Pressable
