@@ -16,7 +16,7 @@ export default function App() {
   screen = <StartGameScreen onGuessedNum={userGuessedNumHandler} />;
 
   if (userGuessedNum) {
-    screen = <GameScreen />;
+    screen = <GameScreen userGuessedNum={userGuessedNum} />;
   }
 
   return (

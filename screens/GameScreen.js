@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Alert } from "react-native";
 import { useState } from "react";
 import Title from "../components/Title";
 import NumberContainer from "../components/NumberContainer";
@@ -17,20 +17,32 @@ function generateRandomNumber(min, max, userGuessedNum) {
 let minBoundary = 1;
 let maxBoundary = 100;
 
-function GameScreen(props) {
+function GameScreen({ userGuessedNum }) {
   const initGuess = generateRandomNumber(
     minBoundary,
     maxBoundary,
-    props.enteredNum
+    userGuessedNum
   );
   const [currentGuess, setCurrentGuess] = useState(initGuess);
 
+  console.log(userGuessedNum);
+
   function nextGuessHandler(direction) {
+    if (
+      (direction === "lower" && currentGuess < userGuessedNum) ||
+      (direction === "greater" && currentGuess > userGuessedNum)
+    ) {
+      Alert.alert("wrong guess. please give a correct guess.", [
+        { text: "Sorry!", style: "cancel" },
+      ]);
+      return;
+    }
     if (direction === "lower") {
       maxBoundary = currentGuess;
     } else {
       minBoundary = currentGuess + 1;
     }
+    console.warn(minBoundary, maxBoundary);
     const newNumber = generateRandomNumber(
       minBoundary,
       maxBoundary,
