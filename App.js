@@ -4,19 +4,32 @@ import { useState } from "react";
 
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
+import GameOverScreen from "./screens/GameOverScreen";
+
 import Colors from "./constants/colors";
 
 export default function App() {
   [userNumber, setUserNumber] = useState();
+  [gameIsOver, setGameIsOver] = useState(false);
 
   function userNumberHandler(guessedNum) {
     setUserNumber(guessedNum);
   }
 
+  function gameIsOverHandler() {
+    setGameIsOver(true);
+  }
+
   screen = <StartGameScreen onGuessedNum={userNumberHandler} />;
 
   if (userNumber) {
-    screen = <GameScreen userNumber={userNumber} />;
+    screen = (
+      <GameScreen userNumber={userNumber} onGameIsOver={gameIsOverHandler} />
+    );
+  }
+
+  if (gameIsOver && userNumber) {
+    screen = <GameOverScreen />;
   }
 
   return (
