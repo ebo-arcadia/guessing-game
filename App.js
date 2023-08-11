@@ -7,16 +7,16 @@ import GameScreen from "./screens/GameScreen";
 import Colors from "./constants/colors";
 
 export default function App() {
-  [userGuessedNum, setUserGuessedNum] = useState();
+  [userNumber, setUserNumber] = useState();
 
-  function userGuessedNumHandler(guessedNum) {
-    setUserGuessedNum(guessedNum);
+  function userNumberHandler(guessedNum) {
+    setUserNumber(guessedNum);
   }
 
-  screen = <StartGameScreen onGuessedNum={userGuessedNumHandler} />;
+  screen = <StartGameScreen onGuessedNum={userNumberHandler} />;
 
-  if (userGuessedNum) {
-    screen = <GameScreen userGuessedNum={userGuessedNum} />;
+  if (userNumber) {
+    screen = <GameScreen userNumber={userNumber} />;
   }
 
   return (

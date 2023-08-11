@@ -1,14 +1,14 @@
-import { Text, View, StyleSheet, Alert } from "react-native";
+import { Text, View, StyleSheet, Alert, Button } from "react-native";
 import { useState } from "react";
 import Title from "../components/Title";
 import NumberContainer from "../components/NumberContainer";
 import PrimaryButton from "../components/PrimaryButton";
 
-function generateRandomNumber(min, max, userGuessedNum) {
+function generateRandomNumber(min, max, userNumber) {
   let randomNumber = Math.floor(Math.random() * (max - min)) + min;
 
-  if (randomNumber === userGuessedNum) {
-    return generateRandomNumber(min, max, userGuessedNum);
+  if (randomNumber === userNumber) {
+    return generateRandomNumber(min, max, userNumber);
   } else {
     return randomNumber;
   }
@@ -17,32 +17,33 @@ function generateRandomNumber(min, max, userGuessedNum) {
 let minBoundary = 1;
 let maxBoundary = 100;
 
-function GameScreen({ userGuessedNum }) {
-  const initGuess = generateRandomNumber(
-    minBoundary,
-    maxBoundary,
-    userGuessedNum
-  );
+function GameScreen({ userNumber }) {
+  const initGuess = generateRandomNumber(minBoundary, maxBoundary, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initGuess);
-
-  console.log(userGuessedNum);
+  console.log("current guessed num: ", currentGuess);
+  console.log("current user num: ", userNumber);
 
   function nextGuessHandler(direction) {
-    if (
-      (direction === "lower" && currentGuess < userGuessedNum) ||
-      (direction === "greater" && currentGuess > userGuessedNum)
-    ) {
-      Alert.alert("wrong guess. please give a correct guess.", [
-        { text: "Sorry!", style: "cancel" },
+    if (direction === "lower" && currentGuess < userNumber) {
+      Alert.alert("Wrong Direction!", "Needs to guess higher", [
+        { text: "Try again", style: "cancel" },
       ]);
       return;
     }
+    if (direction === "higher" && currentGuess > userNumber) {
+      Alert.alert("Wrong Direction!", "Needs to guess lower", [
+        { text: "Try again", style: "cancel" },
+      ]);
+      return;
+    }
+
     if (direction === "lower") {
       maxBoundary = currentGuess;
-    } else {
+    }
+    if (direction === "higher") {
       minBoundary = currentGuess + 1;
     }
-    console.warn(minBoundary, maxBoundary);
+
     const newNumber = generateRandomNumber(
       minBoundary,
       maxBoundary,
