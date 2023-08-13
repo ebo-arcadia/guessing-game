@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet, Alert } from "react-native";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Title from "../components/Title";
 import NumberContainer from "../components/NumberContainer";
 import PrimaryButton from "../components/PrimaryButton";
@@ -18,7 +18,11 @@ let minBoundary = 1;
 let maxBoundary = 100;
 
 function GameScreen({ userNumber, onGameIsOver }) {
-  const initGuess = generateRandomNumber(1, 100, userNumber);
+  const initGuess = useMemo(
+    () => generateRandomNumber(minBoundary, maxBoundary, userNumber),
+    [currentGuess]
+  );
+  generateRandomNumber(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initGuess);
 
   useEffect(() => {
