@@ -18,7 +18,7 @@ let minBoundary = 1;
 let maxBoundary = 100;
 
 function GameScreen({ userNumber, onGameIsOver }) {
-  const initGuess = generateRandomNumber(minBoundary, maxBoundary, userNumber);
+  const initGuess = generateRandomNumber(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initGuess);
 
   useEffect(() => {
@@ -29,6 +29,7 @@ function GameScreen({ userNumber, onGameIsOver }) {
 
   console.info("current guess", currentGuess);
   console.info("user number", userNumber);
+  console.info(minBoundary, maxBoundary);
 
   function nextGuessHandler(direction) {
     if (direction === "lower" && currentGuess < userNumber) {
