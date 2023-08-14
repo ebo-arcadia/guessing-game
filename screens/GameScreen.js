@@ -4,6 +4,7 @@ import Title from "../components/Title";
 import NumberContainer from "../components/NumberContainer";
 import PrimaryButton from "../components/PrimaryButton";
 import Card from "../components/Card";
+import InstructionText from "../components/InstructionText";
 
 function generateRandomNumber(min, max, userNumber) {
   let randomNumber = Math.floor(Math.random() * (max - min)) + min;
@@ -70,7 +71,7 @@ function GameScreen({ userNumber, onGameIsOver }) {
       <Title>Current Guessed Number</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
-        <Text>Is the number too high or too lower?</Text>
+        <InstructionText>Is the number too high or too lower?</InstructionText>
         <View>
           <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
             -
