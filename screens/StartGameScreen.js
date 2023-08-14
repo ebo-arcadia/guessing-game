@@ -1,7 +1,9 @@
-import { TextInput, View, StyleSheet, Alert } from "react-native";
+import { Text, TextInput, View, StyleSheet, Alert } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import { useState } from "react";
 import Colors from "../constants/colors";
+import Title from "../components/Title";
+import Card from "../components/Card";
 
 function StartGameScreen({ onGuessedNum }) {
   const [enteredNum, setEnteredNum] = useState("");
@@ -27,42 +29,41 @@ function StartGameScreen({ onGuessedNum }) {
   }
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.playInput}
-        maxLength={2}
-        keyboardType="number-pad"
-        autoCapitalize="none"
-        autoCorrect={false}
-        onChangeText={inputTextHandler}
-        value={enteredNum}
-      />
-      <View style={styles.buttonsContainer}>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+    <View style={styles.rootContainer}>
+      <Title>What is my number?</Title>
+      <Card>
+        <Text style={styles.instructionText}>Enter a number</Text>
+        <TextInput
+          style={styles.playInput}
+          maxLength={2}
+          keyboardType="number-pad"
+          autoCapitalize="none"
+          autoCorrect={false}
+          onChangeText={inputTextHandler}
+          value={enteredNum}
+        />
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={confirmInputHandler}>Row!</PrimaryButton>
+          </View>
         </View>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={confirmInputHandler}>Row!</PrimaryButton>
-        </View>
-      </View>
+      </Card>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  inputContainer: {
-    justifyContent: "center",
-    alignItems: "center",
+  rootContainer: {
+    flex: 1,
     marginTop: 100,
-    marginHorizontal: 20,
-    padding: 16,
-    backgroundColor: Colors.DarkRed,
-    borderRadius: 10,
-    elevation: 8,
-    shadowColor: Colors.PrimaryBlack,
-    shadowOffset: { width: 10, height: 10 },
-    shadowRadius: 7,
-    shadowOpacity: 0.9,
+    alignItems: "center",
+  },
+  instructionText: {
+    color: Colors.PrimaryYellow,
+    fontSize: 20,
   },
   playInput: {
     height: 30,

@@ -3,6 +3,7 @@ import { useEffect, useState, useMemo } from "react";
 import Title from "../components/Title";
 import NumberContainer from "../components/NumberContainer";
 import PrimaryButton from "../components/PrimaryButton";
+import Card from "../components/Card";
 
 function generateRandomNumber(min, max, userNumber) {
   let randomNumber = Math.floor(Math.random() * (max - min)) + min;
@@ -68,16 +69,18 @@ function GameScreen({ userNumber, onGameIsOver }) {
     <View style={styles.screen}>
       <Title>Current Guessed Number</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <Text>Is the number too high or too lower?</Text>
-      <View>
-        <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
-          -
-        </PrimaryButton>
-        <PrimaryButton onPress={nextGuessHandler.bind(this, "higher")}>
-          +
-        </PrimaryButton>
-      </View>
-      <Text>Load rounds</Text>
+      <Card>
+        <Text>Is the number too high or too lower?</Text>
+        <View>
+          <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
+            -
+          </PrimaryButton>
+          <PrimaryButton onPress={nextGuessHandler.bind(this, "higher")}>
+            +
+          </PrimaryButton>
+        </View>
+        <Text>Load rounds</Text>
+      </Card>
     </View>
   );
 }
