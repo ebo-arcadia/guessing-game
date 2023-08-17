@@ -5,6 +5,7 @@ import NumberContainer from "../components/NumberContainer";
 import PrimaryButton from "../components/PrimaryButton";
 import Card from "../components/Card";
 import InstructionText from "../components/InstructionText";
+import Colors from "../constants/colors";
 
 function generateRandomNumber(min, max, userNumber) {
   let randomNumber = Math.floor(Math.random() * (max - min)) + min;
@@ -71,16 +72,21 @@ function GameScreen({ userNumber, onGameIsOver }) {
       <Title>Current Guessed Number</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
-        <InstructionText>Is the number too high or too lower?</InstructionText>
-        <View>
-          <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
-            -
-          </PrimaryButton>
-          <PrimaryButton onPress={nextGuessHandler.bind(this, "higher")}>
-            +
-          </PrimaryButton>
+        <InstructionText style={styles.instructionText}>
+          Is the number too high or too lower?
+        </InstructionText>
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
+              -
+            </PrimaryButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, "higher")}>
+              +
+            </PrimaryButton>
+          </View>
         </View>
-        <Text>Load rounds</Text>
       </Card>
     </View>
   );
@@ -92,5 +98,15 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 20,
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+  },
+  buttonContainer: {
+    flex: 1,
+  },
+  instructionText: {
+    marginBottom: 20,
+    color: Colors.PrimaryRed,
   },
 });
