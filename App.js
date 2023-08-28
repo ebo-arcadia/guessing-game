@@ -1,6 +1,8 @@
 import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
@@ -8,9 +10,21 @@ import GameOverScreen from "./screens/GameOverScreen";
 
 import Colors from "./constants/colors";
 
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
   [userNumber, setUserNumber] = useState();
   [gameIsOver, setGameIsOver] = useState(false);
+
+  const [fontLoaded] = useFonts({
+    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+  });
+
+  if (!fontLoaded) {
+    return null;
+  }
 
   function userNumberHandler(guessedNum) {
     setUserNumber(guessedNum);
