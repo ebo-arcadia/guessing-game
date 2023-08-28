@@ -1,8 +1,10 @@
 import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useFonts } from "expo-font";
+import Entypo from "@expo/vector-icons/Entypo";
 import * as SplashScreen from "expo-splash-screen";
+import * as Font from "expo-font";
 
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
@@ -16,6 +18,7 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
   [userNumber, setUserNumber] = useState();
   [gameIsOver, setGameIsOver] = useState(false);
+  [appIsReady, setAppIsReady] = useState(false);
 
   const [fontLoaded] = useFonts({
     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
@@ -23,6 +26,30 @@ export default function App() {
   });
 
   if (!fontLoaded) {
+    SplashScreen.hideAsync();
+  }
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        // pre load fonts
+        await Font.loadAsync(Entypo.font);
+      } catch (err) {
+        console.warn(err);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
     return null;
   }
 
@@ -50,6 +77,7 @@ export default function App() {
     <LinearGradient
       colors={[Colors.PrimaryYellow, Colors.PrimaryRed]}
       style={styles.rootScreen}
+      onLayout={onLayoutRootView}
     >
       <ImageBackground
         source={require("./assets/images/dice.jpg")}
