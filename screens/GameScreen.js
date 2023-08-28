@@ -1,4 +1,5 @@
-import { Text, View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 import { useEffect, useState, useMemo } from "react";
 import Title from "../components/Title";
 import NumberContainer from "../components/NumberContainer";
@@ -78,12 +79,12 @@ function GameScreen({ userNumber, onGameIsOver }) {
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
-              -
+              <FontAwesome name="arrow-down" size={24} color="black" />
             </PrimaryButton>
           </View>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={nextGuessHandler.bind(this, "higher")}>
-              +
+              <FontAwesome name="arrow-up" size={24} color="black" />
             </PrimaryButton>
           </View>
         </View>
