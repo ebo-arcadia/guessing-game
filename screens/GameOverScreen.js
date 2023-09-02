@@ -3,7 +3,12 @@ import Title from "../components/Title";
 import Colors from "../constants/colors";
 import PrimaryButton from "../components/PrimaryButton";
 
-function GameOverScreen() {
+function GameOverScreen(props) {
+  [roundsNumber, userNumber, onStartANewGame] = [
+    props.roundsNumber,
+    props.userNumber,
+    props.onStartANewGame,
+  ];
   return (
     <View style={styles.rootContainer}>
       <Title>The Game is over!</Title>
@@ -14,10 +19,10 @@ function GameOverScreen() {
         />
       </View>
       <Text style={styles.summaryText}>
-        <Text style={styles.highlight}>X</Text> rounds are needed to guess the
-        number <Text style={styles.highlight}>Y</Text>
+        <Text style={styles.highlight}>{roundsNumber}</Text> rounds are needed
+        to guess the number <Text style={styles.highlight}>{userNumber}</Text>
       </Text>
-      <PrimaryButton>Another round!</PrimaryButton>
+      <PrimaryButton onPress={onStartANewGame}>Start a New Game</PrimaryButton>
     </View>
   );
 }
