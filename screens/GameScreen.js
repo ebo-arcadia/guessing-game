@@ -1,4 +1,4 @@
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, Text } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useEffect, useState, useMemo } from "react";
 import Title from "../components/Title";
@@ -28,6 +28,7 @@ function GameScreen({ userNumber, onGameIsOver }) {
   );
   generateRandomNumber(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initGuess);
+  const [guessRounds, setGuessRounds] = useState([initGuess]);
 
   useEffect(() => {
     if (currentGuess === userNumber) {
@@ -71,6 +72,10 @@ function GameScreen({ userNumber, onGameIsOver }) {
       currentGuess
     );
     setCurrentGuess(newNumber);
+    setGuessRounds((previousGuessedRounds) => [
+      newNumber,
+      ...previousGuessedRounds,
+    ]);
   }
 
   return (
@@ -94,6 +99,11 @@ function GameScreen({ userNumber, onGameIsOver }) {
           </View>
         </View>
       </Card>
+      <View>
+        {guessRounds.map((guessRound) => (
+          <Text key={guessRound}>{guessRound}</Text>
+        ))}
+      </View>
     </View>
   );
 }
