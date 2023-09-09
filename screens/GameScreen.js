@@ -7,6 +7,7 @@ import PrimaryButton from "../components/PrimaryButton";
 import Card from "../components/Card";
 import InstructionText from "../components/InstructionText";
 import Colors from "../constants/colors";
+import GuessLog from "../components/GuessLog";
 
 function generateRandomNumber(min, max, userNumber) {
   let randomNumber = Math.floor(Math.random() * (max - min)) + min;
@@ -29,6 +30,7 @@ function GameScreen({ userNumber, onGameIsOver }) {
   generateRandomNumber(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initGuess);
   const [guessRounds, setGuessRounds] = useState([initGuess]);
+  const guessRoundListLength = guessRounds.length;
 
   useEffect(() => {
     if (currentGuess === userNumber) {
@@ -105,7 +107,12 @@ function GameScreen({ userNumber, onGameIsOver }) {
         ))} */}
         <FlatList
           data={guessRounds}
-          renderItem={(data) => <Text>{data.item}</Text>}
+          renderItem={(data) => (
+            <GuessLog
+              roundNumber={guessRoundListLength - data.index}
+              guessedNumber={data.item}
+            />
+          )}
           keyExtractor={(item) => item.key}
         />
       </View>
